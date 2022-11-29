@@ -12,11 +12,10 @@
     <artifactId>service</artifactId>
     <packaging>pom</packaging>
     <modules>
-
         <module>aliyun-oss</module>
-
+        <module>service-manage</module>
         <module>service-sms</module>
-
+        <module>service-ucenter</module>
     </modules>
 
 

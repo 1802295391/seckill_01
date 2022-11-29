@@ -31,8 +31,8 @@ create table if not exists `customer`
     `level` int null comment '等级',
     `sex` varchar(2) null comment '性别',
     `age` tinyint null comment '年龄',
-    `is_deleted` tinyint(1) not null comment '逻辑删除 1（true）已删除， 0（false）未删除',
-    `is_disabled` tinyint not null comment '是否禁用 1（true）已禁用，  0（false）未禁用',
+    `is_deleted` tinyint(1) default 0 not null comment '逻辑删除 1（true）已删除， 0（false）未删除',
+    `is_disabled` tinyint default 0 not null comment '是否禁用 1（true）已禁用，  0（false）未禁用',
     `gmt_create` datetime not null comment '创建时间',
     `gmt_modified` datetime not null comment '更新时间'
     ) comment '用户表';
@@ -65,7 +65,7 @@ create table if not exists `goods`
     `title` varchar(50) null comment '产品标题',
     `cover_image` varchar(256) null comment '封面图片',
     `detail_image` varchar(256) null comment '详细图片',
-    `start_time` varchar(256) null comment '秒杀开始时间',
+    `start_time` datetime null comment '秒杀开始时间',
     `audit` tinyint null comment '审核字段（0审核。1发布。2退回）',
     `cause` longtext null comment '退回原因',
     `price` decimal null comment '价格',
@@ -142,14 +142,15 @@ insert into `user_goods` (`collection_id`, `user_id`, `goods_id`) values ('11962
 create table if not exists `orders`
 (
     `orders_id` char(19) not null comment '订单id' primary key,
+    orders_num varchar(256) not null comment '订单号',
     `user_id` char(19) not null comment '用户id',
     `goods_id` char(19) not null comment '产品id',
     `username` varchar(50) null comment '用户名',
     `title` varchar(50) null comment '产品名称',
     `state` tinyint null comment '支付状态（0待支付。1已支付。2退款中）',
     `phone` varchar(11) null comment '用户手机号',
-    `total_price` decimal default 0 null comment '总价格',
-    `goods_num` int default 0 null comment '购买总数',
+    `total_price` decimal  null comment '总价格',
+    `goods_num` int null comment '购买总数',
     `is_refund` tinyint default 0 not null comment '是否为可退款产品',
     `gmt_create` datetime default CURRENT_TIMESTAMP not null comment '创建时间',
     `gmt_modified` datetime default CURRENT_TIMESTAMP not null on update CURRENT_TIMESTAMP comment '更新时间'
@@ -161,9 +162,9 @@ create table if not exists `orders`
 -- Records of orders
 -- ----------------------------
 
-insert into `orders` (`orders_id`, `user_id`, `goods_id`, `username`, `title`, `state`, `phone`) values ('129227888958885069', '1596558950512316410', '1189389726308478973', '钱睿渊', '厦门大学', 0, '17162194381');
-insert into `orders` (`orders_id`, `user_id`, `goods_id`, `username`, `title`, `state`, `phone`) values ('129227888958885060', '1596558950512316437', '1189389726308478973', '严志泽', '河海大学', 0, '17733446818');
-insert into `orders` (`orders_id`, `user_id`, `goods_id`, `username`, `title`, `state`, `phone`) values ('129227888958885061', '1596558950512316437', '1189389726308478971', '郭皓轩', '上海大学', 0, '15376909294');
+insert into `orders` (`orders_id`,orders_num, `user_id`, `goods_id`, `username`, `title`, `state`, `phone`) values ('129227888958885069','888958885069', '1596558950512316410', '1189389726308478973', '钱睿渊', '厦门大学', 0, '17162194381');
+insert into `orders` (`orders_id`,orders_num,`user_id`, `goods_id`, `username`, `title`, `state`, `phone`) values ('129227888958885060','888958885060', '1596558950512316437', '1189389726308478973', '严志泽', '河海大学', 0, '17733446818');
+insert into `orders` (`orders_id`,orders_num, `user_id`, `goods_id`, `username`, `title`, `state`, `phone`) values ('129227888958885061','888958885061', '1596558950512316437', '1189389726308478971', '郭皓轩', '上海大学', 0, '15376909294');
 
 
 
