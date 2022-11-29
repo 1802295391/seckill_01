@@ -59,7 +59,7 @@ public class Customer implements Serializable {
     private Integer level;
 
     @ApiModelProperty(value = "性别")
-    private String sex;
+    private Integer sex;
 
     @ApiModelProperty(value = "年龄")
     private Integer age;

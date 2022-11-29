@@ -12,11 +12,11 @@ public class CustomerQuery implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @ApiModelProperty(value = "客户名称,模糊查询")
-    private String username;
+        private String username;
     @ApiModelProperty(value = "会员等级")
     private Integer level;
     @ApiModelProperty(value = "客户性别")
-    private String sex;
+    private Integer sex;
     @ApiModelProperty(value = "是否禁用 1（true）已禁用，  0（false）未禁用")
     private Integer isDisabled;
     @ApiModelProperty(value = "查询开始时间", example = "2019-01-01 10:10:10")

@@ -4,6 +4,7 @@ package com.zjut.manageservice.controller;
 import com.alibaba.excel.EasyExcel;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.zjut.commonutils.R;
+import com.zjut.manageservice.pojo.Customer;
 import com.zjut.manageservice.pojo.Goods;
 import com.zjut.manageservice.pojo.Goods;
 
@@ -125,6 +126,18 @@ public class GoodsController {
        goodsService.importGoodsData(file,goodsService);
 //判断返回集合是否为空
         return R.ok();
+    }
+
+
+
+
+    @ApiOperation(value = "根据ID查询商品")
+    @GetMapping("{id}")
+    public R getById(
+            @ApiParam(name = "id", value = "商品ID", required = true)
+            @PathVariable String id){
+        Goods goods = goodsService.getById(id);
+        return R.ok().data("item", goods);
     }
 
 }

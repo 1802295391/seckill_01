@@ -87,7 +87,14 @@ public class CustomerController {
         return R.ok();
     }
 
-
+    @ApiOperation(value = "根据ID查询客户")
+    @GetMapping("{id}")
+    public R getById(
+            @ApiParam(name = "id", value = "客户ID", required = true)
+            @PathVariable String id){
+        Customer customer = customerService.getById(id);
+        return R.ok().data("item", customer);
+    }
 
 
 

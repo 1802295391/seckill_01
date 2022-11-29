@@ -33,7 +33,7 @@ public class CustomerServiceImpl extends ServiceImpl<CustomerMapper, Customer> i
         String name = customerQuery.getUsername();
         Integer level = customerQuery.getLevel();
         String begin = customerQuery.getBegin();
-        String sex = customerQuery.getSex();
+        Integer sex = customerQuery.getSex();
         Integer isDisabled=customerQuery.getIsDisabled();
         if (!StringUtils.isEmpty(name)) {
             queryWrapper.like("name", name);
@@ -66,7 +66,7 @@ public class CustomerServiceImpl extends ServiceImpl<CustomerMapper, Customer> i
             }
             String name = customerQuery.getUsername();
             Integer level = customerQuery.getLevel();
-            String sex = customerQuery.getSex();
+        Integer sex = customerQuery.getSex();
             String begin = customerQuery.getBegin();
             Integer isDisabled=customerQuery.getIsDisabled();
             if (!StringUtils.isEmpty(name)) {
