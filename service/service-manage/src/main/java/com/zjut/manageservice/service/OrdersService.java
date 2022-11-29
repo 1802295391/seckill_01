@@ -1,7 +1,11 @@
 package com.zjut.manageservice.service;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.zjut.manageservice.pojo.Orders;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.zjut.manageservice.pojo.vo.OrdersQuery;
+
+import java.util.List;
 
 /**
  * <p>
@@ -13,4 +17,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface OrdersService extends IService<Orders> {
 
+    void pageQuery(Page<Orders> pageParam, OrdersQuery ordersQuery);
+
+    List<Orders> idasclist(OrdersQuery orders);
 }
