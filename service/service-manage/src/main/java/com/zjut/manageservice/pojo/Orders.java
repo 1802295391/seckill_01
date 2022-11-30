@@ -56,8 +56,8 @@ public class Orders implements Serializable {
     @ApiModelProperty(value = "商品名称")
     private String title;
 
-    @ExcelProperty("支付状态（0待支付。1已支付。2退款中）")
-    @ApiModelProperty(value = "支付状态（0待支付。1已支付。2退款中）")
+    @ExcelProperty("支付状态（0待支付。1已支付。2退款中.3已完成后续交易的历史订单）")
+    @ApiModelProperty(value = "支付状态（0待支付。1已支付。2退款中.3已完成后续交易的历史订单）")
     private Integer state;
 
     @ExcelProperty("用户手机号")

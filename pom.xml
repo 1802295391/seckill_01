@@ -11,6 +11,7 @@
         <module>service/service-sms</module>
         <module>service/service-ucenter</module>
         <module>service/service-manage</module>
+        <module>service/service-cms</module>
     </modules>
 
     <parent>

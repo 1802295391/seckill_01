@@ -20,4 +20,6 @@ public interface OrdersService extends IService<Orders> {
     void pageQuery(Page<Orders> pageParam, OrdersQuery ordersQuery);
 
     List<Orders> idasclist(OrdersQuery orders);
+
+    void pageHistoryQuery(Page<Orders> pageParam, OrdersQuery ordersQuery);
 }

@@ -101,5 +101,42 @@ public class OrdersServiceImpl extends ServiceImpl<OrdersMapper, Orders> impleme
     }
 
 
-    
+
+
+
+
+    @Override
+    public void pageHistoryQuery(Page<Orders> pageParam, OrdersQuery ordersQuery) {
+        QueryWrapper<Orders> queryWrapper = new QueryWrapper<>();
+        queryWrapper.orderByDesc("gmt_create");
+        if (ordersQuery == null) {
+            baseMapper.selectPage(pageParam, queryWrapper);
+            return;
+        }
+        String ordersNum = ordersQuery.getOrdersNum();
+        BigDecimal max = ordersQuery.getPricemax();
+        BigDecimal min = ordersQuery.getPricemin();
+        Integer state = ordersQuery.getState();
+        String begin = ordersQuery.getBegintime();
+        queryWrapper.eq("is_deleted",0);
+        queryWrapper.eq("state",3);
+        if (!StringUtils.isEmpty(ordersNum)) {
+            queryWrapper.like("orders_num", ordersNum);
+        }
+        if (!StringUtils.isEmpty(max)) {
+            queryWrapper.le("total_price", max);
+        }
+        if (!StringUtils.isEmpty(min)) {
+            queryWrapper.ge("total_price", min);
+        }
+        if (!StringUtils.isEmpty(begin)) {
+            queryWrapper.ge("gmt_create", begin);
+        }
+        if (!StringUtils.isEmpty(state)) {
+            queryWrapper.eq("state", state);
+        }
+
+        baseMapper.selectPage(pageParam, queryWrapper);
+    }
+
 }

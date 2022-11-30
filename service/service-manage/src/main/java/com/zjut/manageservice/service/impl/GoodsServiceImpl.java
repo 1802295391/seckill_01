@@ -113,5 +113,51 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
                 throw new GuliException(20002,"添加商品失败");
             }
         }
-    
+
+
+
+
+
+
+
+
+    @Override
+    public void pageBackQuery(Page<Goods> pageParam, GoodsQuery goodsQuery) {
+        QueryWrapper<Goods> queryWrapper = new QueryWrapper<>();
+        queryWrapper.orderByDesc("gmt_create");
+        if (goodsQuery == null) {
+            baseMapper.selectPage(pageParam, queryWrapper);
+            return;
+        }
+        String name = goodsQuery.getTitle();
+        BigDecimal max = goodsQuery.getPricemax();
+        BigDecimal min = goodsQuery.getPricemin();
+        String begin = goodsQuery.getBegintime();
+        queryWrapper.eq("audit",2);
+        if (!StringUtils.isEmpty(name)) {
+            queryWrapper.like("title", name);
+        }
+        if (!StringUtils.isEmpty(max)) {
+            queryWrapper.le("price", max);
+        }
+        if (!StringUtils.isEmpty(min)) {
+            queryWrapper.ge("price", min);
+        }
+        if (!StringUtils.isEmpty(begin)) {
+            queryWrapper.ge("gmt_create", begin);
+        }
+        baseMapper.selectPage(pageParam, queryWrapper);
+    }
+
+    @Override
+    public Goods setAudit(String id) {
+
+
+         Goods goods = baseMapper.selectById(id);
+         goods.setAudit(0);
+         goods.setCause("");
+
+        return goods;
+    }
+
 }

@@ -23,4 +23,8 @@ public interface GoodsService extends IService<Goods> {
     List<Goods> idasclist(GoodsQuery goodsQuery);
 
     void importGoodsData(MultipartFile file, GoodsService goodsService);
+
+    void pageBackQuery(Page<Goods> pageParam, GoodsQuery goodsQuery);
+
+    Goods setAudit(String id);
 }

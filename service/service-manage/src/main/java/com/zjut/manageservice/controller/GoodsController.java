@@ -150,5 +150,38 @@ public class GoodsController {
         return R.ok();
     }
 
+
+
+
+
+
+    @ApiOperation(value = "分页被退回的商品列表")
+    @PostMapping("back/{page}/{limit}")
+    public R pageBackQuery(
+            @ApiParam(name = "page", value = "当前页码", required = true)
+            @PathVariable Long page,
+            @ApiParam(name = "limit", value = "每页记录数", required = true)
+            @PathVariable Long limit,
+            @ApiParam(name = "GoodsQuery", value = "查询对象")
+            @RequestBody(required = false) GoodsQuery goodsQuery) {
+        Page<Goods> pageParam = new Page<>(page, limit);
+        goodsService.pageBackQuery(pageParam, goodsQuery);
+
+        List<Goods> records = pageParam.getRecords();
+        long total = pageParam.getTotal();
+        return R.ok().data("total", total).data("rows", records);
+    }
+
+
+
+    @ApiOperation(value = "重新提交")
+    @GetMapping("rool/{id}")
+    public R roolBackById(
+            @PathVariable("id") String id){
+         Goods goods = new Goods();
+         goods=goodsService.setAudit(id);
+         goodsService.updateById(goods);
+        return R.ok();
+    }
 }
 

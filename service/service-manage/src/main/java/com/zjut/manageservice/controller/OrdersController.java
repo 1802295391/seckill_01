@@ -70,5 +70,27 @@ public class OrdersController {
         EasyExcel.write(fileName, Orders.class).sheet("订单列表").doWrite(list);
         return R.ok().data("address",fileName);
     }
+
+
+
+
+    @ApiOperation(value = "分页历史订单列表")
+    @PostMapping("history/{page}/{limit}")
+    public R pageHistoryQuery(
+            @ApiParam(name = "page", value = "当前页码", required = true)
+            @PathVariable Long page,
+            @ApiParam(name = "limit", value = "每页记录数", required = true)
+            @PathVariable Long limit,
+            @ApiParam(name = "OrdersQuery", value = "查询对象", required = false)
+            @RequestBody(required = false) OrdersQuery OrdersQuery) {
+        Page<Orders> pageParam = new Page<>(page, limit);
+        ordersService.pageHistoryQuery(pageParam, OrdersQuery);
+
+        List<Orders> records = pageParam.getRecords();
+
+        long total = pageParam.getTotal();
+        return R.ok().data("total", total).data("rows", records);
+    }
+
 }
 
