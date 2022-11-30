@@ -64,7 +64,8 @@ public class Goods implements Serializable {
 
     @ApiModelProperty(value = "产品描述")
     private String description;
-
+    @ApiModelProperty(value = "是否为可退款产品(0可退款，1不可退款)")
+    private Integer isRefund;
     @ApiModelProperty(value = "是否删除(0-未删, 1-已删)")
     private Integer isDeleted;
     @TableField(fill = FieldFill.INSERT)

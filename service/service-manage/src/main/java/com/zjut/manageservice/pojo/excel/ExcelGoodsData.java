@@ -33,6 +33,9 @@ public class ExcelGoodsData {
     @ExcelProperty(index = 6)
     private Integer limitNum;
 
+    @ExcelProperty("是否为可退款产品(0可退款，1不可退款)")
+    private Integer isRefund;
+
     @ExcelProperty(index = 7)
     private String description;
 

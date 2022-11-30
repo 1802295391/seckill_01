@@ -33,6 +33,7 @@ public class GoodsExcelListener extends AnalysisEventListener<ExcelGoodsData>
         goods.setLimitNum(user.getLimitNum());
         goods.setPrice(user.getPrice());
         goods.setDescription(user.getDescription());
+        goods.setIsRefund(user.getIsRefund());
         goodsService.save(goods);
     }
     //读取excel表头信息
