@@ -83,11 +83,11 @@ create table if not exists `goods`
 -- ----------------------------
 -- Records of goods
 -- ----------------------------
-insert into `goods` (`id`, `title`, `cover_image`, `detail_image`, `start_time`, `audit`, `price`, `num`, `limit_num`,`is_refund`) values ('1189389726308478977', '广东工业大学', 'www.nam-botsford.name', 'www.mckinley-kulas.name', '张振家', 0, 19, 564671772, 567229,0);
-insert into `goods` (`id`, `title`, `cover_image`, `detail_image`, `start_time`, `audit`, `price`, `num`, `limit_num`,`is_refund`) values ('1189389726308478970', '汕头大学', 'www.elli-haley.info', 'www.johnsie-leffler.co', '马驰', 0, 950348152, 606, 5869852,0);
-insert into `goods` (`id`, `title`, `cover_image`, `detail_image`, `start_time`, `audit`, `price`, `num`, `limit_num`,`is_refund`) values ('1189389726308478971', '武汉科技大学', 'www.william-smith.org', 'www.shani-ritchie.com', '熊皓轩', 0, 99, 376694, 900473,0);
-insert into `goods` (`id`, `title`, `cover_image`, `detail_image`, `start_time`, `audit`, `price`, `num`, `limit_num`,`is_refund`) values ('1189389726308478972', '嘉兴学院', 'www.providencia-gottlieb.io', 'www.milissa-hahn.biz', '曹锦程', 0, 60226725, 34, 927415,0);
-insert into `goods` (`id`, `title`, `cover_image`, `detail_image`, `start_time`, `audit`, `price`, `num`, `limit_num`,`is_refund`) values ('1189389726308478973', '集美大学', 'www.garry-dicki.com', 'www.jarrett-gerhold.info', '廖思源', 0, 12622, 82274274, 90454,0);
+insert into `goods` (`id`, `title`, `cover_image`, `detail_image`, `start_time`, `audit`, `price`, `num`, `limit_num`,`is_refund`) values ('1189389726308478977', '广东工业大学', 'beijing.aliyuncs.com/2020/08/06/587d5686663541d986a750be8c9b99b9java.jpg', 'beijing.aliyuncs.com/2020/08/06/587d5686663541d986a750be8c9b99b9java.jpg', '2022-07-30 07:42:58', 0, 19, 564671772, 567229,0);
+insert into `goods` (`id`, `title`, `cover_image`, `detail_image`, `start_time`, `audit`, `price`, `num`, `limit_num`,`is_refund`) values ('1189389726308478970', '汕头大学', 'beijing.aliyuncs.com/2020/08/06/587d5686663541d986a750be8c9b99b9java.jpg', 'beijing.aliyuncs.com/2020/08/06/587d5686663541d986a750be8c9b99b9java.jpg', '2022-07-30 07:42:58', 0, 950348152, 606, 5869852,0);
+insert into `goods` (`id`, `title`, `cover_image`, `detail_image`, `start_time`, `audit`, `price`, `num`, `limit_num`,`is_refund`) values ('1189389726308478971', '武汉科技大学', 'beijing.aliyuncs.com/2020/08/06/587d5686663541d986a750be8c9b99b9java.jpg', 'beijing.aliyuncs.com/2020/08/06/587d5686663541d986a750be8c9b99b9java.jpg', '2022-07-30 07:42:58', 0, 99, 376694, 900473,0);
+insert into `goods` (`id`, `title`, `cover_image`, `detail_image`, `start_time`, `audit`, `price`, `num`, `limit_num`,`is_refund`) values ('1189389726308478972', '嘉兴学院', 'beijing.aliyuncs.com/2020/08/06/587d5686663541d986a750be8c9b99b9java.jpg', 'beijing.aliyuncs.com/2020/08/06/587d5686663541d986a750be8c9b99b9java.jpg', '2022-07-30 07:42:58', 0, 60226725, 34, 927415,0);
+insert into `goods` (`id`, `title`, `cover_image`, `detail_image`, `start_time`, `audit`, `price`, `num`, `limit_num`,`is_refund`) values ('1189389726308478973', '集美大学', 'beijing.aliyuncs.com/2020/08/06/587d5686663541d986a750be8c9b99b9java.jpg', 'beijing.aliyuncs.com/2020/08/06/587d5686663541d986a750be8c9b99b9java.jpg', '2022-07-30 07:42:58', 0, 12622, 82274274, 90454,0);
 
 
 
