@@ -43,6 +43,7 @@ public class OrdersServiceImpl extends ServiceImpl<OrdersMapper, Orders> impleme
         Integer state = ordersQuery.getState();
         String begin = ordersQuery.getBegintime();
         queryWrapper.eq("is_deleted",0);
+        queryWrapper.ne("state",3);
         if (!StringUtils.isEmpty(ordersNum)) {
             queryWrapper.like("orders_num", ordersNum);
         }
@@ -78,7 +79,7 @@ public class OrdersServiceImpl extends ServiceImpl<OrdersMapper, Orders> impleme
         Integer state = ordersQuery.getState();
         String begin = ordersQuery.getBegintime();
         queryWrapper.eq("is_deleted",0);
-
+        queryWrapper.ne("state",3);
         if (!StringUtils.isEmpty(ordersNum)) {
             queryWrapper.like("orders_num", ordersNum);
         }
