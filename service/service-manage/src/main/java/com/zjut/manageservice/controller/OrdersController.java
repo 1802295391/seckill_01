@@ -35,7 +35,7 @@ import java.util.UUID;
 public class OrdersController {
     @Autowired
     private OrdersService ordersService;
-    @ApiOperation(value = "分页客戶列表")
+    @ApiOperation(value = "分页订单列表")
     @PostMapping("{page}/{limit}")
     public R pageQuery(
             @ApiParam(name = "page", value = "当前页码", required = true)
@@ -59,7 +59,7 @@ public class OrdersController {
 
 
     @PostMapping("excel")
-    @ApiOperation(value = "打印客户列表")
+    @ApiOperation(value = "打印订单列表")
     public R exlist(@ApiParam(name = "Orders", value = "查询对象", required = false)
                     @RequestBody(required = false) OrdersQuery ordersQuery) {
 

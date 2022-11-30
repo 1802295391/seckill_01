@@ -72,6 +72,9 @@ public class Orders implements Serializable {
     @ApiModelProperty(value = "购买总数")
     private Integer goodsNum;
 
+    @ApiModelProperty(value = "逻辑删除 1（true）已删除， 0（false）未删除")
+    private Boolean isDeleted;
+
     @ExcelProperty("是否为可退款产品")
     @ApiModelProperty(value = "是否为可退款产品")
     private Integer isRefund;

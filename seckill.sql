@@ -152,6 +152,7 @@ create table if not exists `orders`
     `phone` varchar(11) null comment '用户手机号',
     `total_price` decimal  null comment '总价格',
     `goods_num` int null comment '购买总数',
+    `is_deleted` tinyint default 0 not null comment '是否删除(0-未删, 1-已删)',
     `is_refund` tinyint default 0 not null comment '是否为可退款产品(0可退款，1不可退款)',
     `gmt_create` datetime default CURRENT_TIMESTAMP not null comment '创建时间',
     `gmt_modified` datetime default CURRENT_TIMESTAMP not null on update CURRENT_TIMESTAMP comment '更新时间'
