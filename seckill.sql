@@ -71,6 +71,7 @@ create table if not exists `goods`
     `price` decimal null comment '价格',
     `num` int null comment '数量',
     `limit_num` int not null comment '限制数量',
+    `is_refund` tinyint default 0 null comment '是否为可退款产品(0可退款，1不可退款)',
     `description` longtext null comment '产品描述',
     `is_deleted` tinyint default 0 not null comment '是否删除(0-未删, 1-已删)',
     `gmt_create` datetime default CURRENT_TIMESTAMP not null comment '创建时间',
@@ -82,11 +83,11 @@ create table if not exists `goods`
 -- ----------------------------
 -- Records of goods
 -- ----------------------------
-insert into `goods` (`id`, `title`, `cover_image`, `detail_image`, `start_time`, `audit`, `price`, `num`, `limit_num`) values ('1189389726308478977', '广东工业大学', 'www.nam-botsford.name', 'www.mckinley-kulas.name', '张振家', 0, 19, 564671772, 567229);
-insert into `goods` (`id`, `title`, `cover_image`, `detail_image`, `start_time`, `audit`, `price`, `num`, `limit_num`) values ('1189389726308478970', '汕头大学', 'www.elli-haley.info', 'www.johnsie-leffler.co', '马驰', 0, 950348152, 606, 5869852);
-insert into `goods` (`id`, `title`, `cover_image`, `detail_image`, `start_time`, `audit`, `price`, `num`, `limit_num`) values ('1189389726308478971', '武汉科技大学', 'www.william-smith.org', 'www.shani-ritchie.com', '熊皓轩', 0, 99, 376694, 900473);
-insert into `goods` (`id`, `title`, `cover_image`, `detail_image`, `start_time`, `audit`, `price`, `num`, `limit_num`) values ('1189389726308478972', '嘉兴学院', 'www.providencia-gottlieb.io', 'www.milissa-hahn.biz', '曹锦程', 0, 60226725, 34, 927415);
-insert into `goods` (`id`, `title`, `cover_image`, `detail_image`, `start_time`, `audit`, `price`, `num`, `limit_num`) values ('1189389726308478973', '集美大学', 'www.garry-dicki.com', 'www.jarrett-gerhold.info', '廖思源', 0, 12622, 82274274, 90454);
+insert into `goods` (`id`, `title`, `cover_image`, `detail_image`, `start_time`, `audit`, `price`, `num`, `limit_num`,`is_refund`) values ('1189389726308478977', '广东工业大学', 'www.nam-botsford.name', 'www.mckinley-kulas.name', '张振家', 0, 19, 564671772, 567229,0);
+insert into `goods` (`id`, `title`, `cover_image`, `detail_image`, `start_time`, `audit`, `price`, `num`, `limit_num`,`is_refund`) values ('1189389726308478970', '汕头大学', 'www.elli-haley.info', 'www.johnsie-leffler.co', '马驰', 0, 950348152, 606, 5869852,0);
+insert into `goods` (`id`, `title`, `cover_image`, `detail_image`, `start_time`, `audit`, `price`, `num`, `limit_num`,`is_refund`) values ('1189389726308478971', '武汉科技大学', 'www.william-smith.org', 'www.shani-ritchie.com', '熊皓轩', 0, 99, 376694, 900473,0);
+insert into `goods` (`id`, `title`, `cover_image`, `detail_image`, `start_time`, `audit`, `price`, `num`, `limit_num`,`is_refund`) values ('1189389726308478972', '嘉兴学院', 'www.providencia-gottlieb.io', 'www.milissa-hahn.biz', '曹锦程', 0, 60226725, 34, 927415,0);
+insert into `goods` (`id`, `title`, `cover_image`, `detail_image`, `start_time`, `audit`, `price`, `num`, `limit_num`,`is_refund`) values ('1189389726308478973', '集美大学', 'www.garry-dicki.com', 'www.jarrett-gerhold.info', '廖思源', 0, 12622, 82274274, 90454,0);
 
 
 
@@ -151,7 +152,7 @@ create table if not exists `orders`
     `phone` varchar(11) null comment '用户手机号',
     `total_price` decimal  null comment '总价格',
     `goods_num` int null comment '购买总数',
-    `is_refund` tinyint default 0 not null comment '是否为可退款产品',
+    `is_refund` tinyint default 0 not null comment '是否为可退款产品(0可退款，1不可退款)',
     `gmt_create` datetime default CURRENT_TIMESTAMP not null comment '创建时间',
     `gmt_modified` datetime default CURRENT_TIMESTAMP not null on update CURRENT_TIMESTAMP comment '更新时间'
     ) comment '订单表';
