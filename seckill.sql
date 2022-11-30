@@ -148,7 +148,7 @@ create table if not exists `orders`
     `goods_id` char(19) not null comment '产品id',
     `username` varchar(50) null comment '用户名',
     `title` varchar(50) null comment '产品名称',
-    `state` tinyint null comment '支付状态（0待支付。1已支付。2退款中）',
+    `state` tinyint null comment '支付状态（0待支付。1已支付。2退款中.3已完成后续交易的历史订单）',
     `phone` varchar(11) null comment '用户手机号',
     `total_price` decimal  null comment '总价格',
     `goods_num` int null comment '购买总数',
@@ -167,7 +167,12 @@ create table if not exists `orders`
 insert into `orders` (`orders_id`,orders_num, `user_id`, `goods_id`, `username`, `title`, `state`, `phone`) values ('129227888958885069','888958885069', '1596558950512316410', '1189389726308478973', '钱睿渊', '厦门大学', 0, '17162194381');
 insert into `orders` (`orders_id`,orders_num,`user_id`, `goods_id`, `username`, `title`, `state`, `phone`) values ('129227888958885060','888958885060', '1596558950512316437', '1189389726308478973', '严志泽', '河海大学', 0, '17733446818');
 insert into `orders` (`orders_id`,orders_num, `user_id`, `goods_id`, `username`, `title`, `state`, `phone`) values ('129227888958885061','888958885061', '1596558950512316437', '1189389726308478971', '郭皓轩', '上海大学', 0, '15376909294');
-
+insert into `orders` (`orders_id`,orders_num, `user_id`, `goods_id`, `username`, `title`, `state`, `phone`) values ('129227888958885062','888958885069', '1596558950512316410', '1189389726308478973', '钱睿渊', '厦门大学', 0, '17162194381');
+insert into `orders` (`orders_id`,orders_num,`user_id`, `goods_id`, `username`, `title`, `state`, `phone`) values ('129227888958885063','888958885060', '1596558950512316437', '1189389726308478973', '严志泽', '河海大学', 0, '17733446818');
+insert into `orders` (`orders_id`,orders_num, `user_id`, `goods_id`, `username`, `title`, `state`, `phone`) values ('129227888958885064','888958885061', '1596558950512316437', '1189389726308478971', '郭皓轩', '上海大学', 0, '15376909294');
+insert into `orders` (`orders_id`,orders_num, `user_id`, `goods_id`, `username`, `title`, `state`, `phone`) values ('129227888958885065','888958885069', '1596558950512316410', '1189389726308478973', '钱睿渊', '厦门大学', 0, '17162194381');
+insert into `orders` (`orders_id`,orders_num,`user_id`, `goods_id`, `username`, `title`, `state`, `phone`) values ('129227888958885066','888958885060', '1596558950512316437', '1189389726308478973', '严志泽', '河海大学', 0, '17733446818');
+insert into `orders` (`orders_id`,orders_num, `user_id`, `goods_id`, `username`, `title`, `state`, `phone`) values ('129227888958885067','888958885061', '1596558950512316437', '1189389726308478971', '郭皓轩', '上海大学', 0, '15376909294');
 
 
 
