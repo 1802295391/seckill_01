@@ -46,9 +46,9 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
         BigDecimal min = goodsQuery.getPricemin();
         Integer audit = goodsQuery.getAudit();
         String begin = goodsQuery.getBegintime();
-    
+        queryWrapper.ne("audit",2);
         if (!StringUtils.isEmpty(name)) {
-            queryWrapper.like("username", name);
+            queryWrapper.like("title", name);
         }
         if (!StringUtils.isEmpty(max)) {
             queryWrapper.le("price", max);
@@ -90,7 +90,7 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
             queryWrapper.ge("price", min);
         }
         if (!StringUtils.isEmpty(begin)) {
-            queryWrapper.ge("gmt_create", begin);
+            queryWrapper.ge("start_time", begin);
         }
         if (!StringUtils.isEmpty(audit)) {
             queryWrapper.eq("audit", audit);

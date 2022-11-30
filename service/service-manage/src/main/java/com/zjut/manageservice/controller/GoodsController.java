@@ -46,7 +46,7 @@ public class GoodsController {
             @PathVariable Long page,
             @ApiParam(name = "limit", value = "每页记录数", required = true)
             @PathVariable Long limit,
-            @ApiParam(name = "GoodsQuery", value = "查询对象", required = false)
+            @ApiParam(name = "GoodsQuery", value = "查询对象")
             @RequestBody(required = false) GoodsQuery goodsQuery) {
         Page<Goods> pageParam = new Page<>(page, limit);
         goodsService.pageQuery(pageParam, goodsQuery);
@@ -62,7 +62,8 @@ public class GoodsController {
             @ApiParam(name = "goodsy", value = "商品对象", required = true)
             @RequestBody Goods goodsy) {
         goodsService.save(goodsy);
-        return R.ok();
+        String id = goodsy.getId();
+        return R.ok().data("id",id);
     }
 
 
@@ -72,7 +73,8 @@ public class GoodsController {
             @ApiParam(name = "goodsy", value = "商品对象", required = true)
             @RequestBody Goods goodsy){
         goodsService.updateById(goodsy);
-        return R.ok();
+        String id = goodsy.getId();
+        return R.ok().data("id",id);
     }
 
 
@@ -138,6 +140,14 @@ public class GoodsController {
             @PathVariable String id){
         Goods goods = goodsService.getById(id);
         return R.ok().data("item", goods);
+    }
+
+
+    @ApiOperation(value = "混子")
+    @GetMapping("publish")
+    public R hunzi(){
+
+        return R.ok();
     }
 
 }

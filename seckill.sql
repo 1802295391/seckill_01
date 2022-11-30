@@ -66,7 +66,7 @@ create table if not exists `goods`
     `cover_image` varchar(256) null comment '封面图片',
     `detail_image` varchar(256) null comment '详细图片',
     `start_time` datetime null comment '秒杀开始时间',
-    `audit` tinyint null comment '审核字段（0审核。1发布。2退回）',
+    `audit` tinyint default 0 null comment '审核字段（0审核。1上架。2退回。3售完）',
     `cause` longtext null comment '退回原因',
     `price` decimal null comment '价格',
     `num` int null comment '数量',
