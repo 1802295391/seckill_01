@@ -17,6 +17,7 @@
         <module>service-sms</module>
         <module>service-cms</module>
         <module>service-ucenter</module>
+        <module>service-audit</module>
     </modules>
 
 
