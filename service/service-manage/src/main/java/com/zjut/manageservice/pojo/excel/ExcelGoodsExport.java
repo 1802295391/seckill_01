@@ -26,6 +26,10 @@ public class ExcelGoodsExport {
 
     private Date startTime;
 
+
+
+    @ExcelProperty("商品等级")
+    private Integer level;
     @ExcelProperty("商品价格")
 
     private BigDecimal price;

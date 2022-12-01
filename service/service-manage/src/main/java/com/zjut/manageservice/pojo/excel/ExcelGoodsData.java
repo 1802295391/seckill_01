@@ -25,18 +25,20 @@ public class ExcelGoodsData {
     private Date startTime;
 
     @ExcelProperty(index = 4)
+    private Integer level;
+    @ExcelProperty(index = 5)
     private BigDecimal price;
 
-    @ExcelProperty(index = 5)
+    @ExcelProperty(index = 6)
     private Integer num;
 
-    @ExcelProperty(index = 6)
+    @ExcelProperty(index = 7)
     private Integer limitNum;
 
-    @ExcelProperty("是否为可退款产品(0可退款，1不可退款)")
+    @ExcelProperty(index =8)
     private Integer isRefund;
 
-    @ExcelProperty(index = 7)
+    @ExcelProperty(index = 9)
     private String description;
 
 }

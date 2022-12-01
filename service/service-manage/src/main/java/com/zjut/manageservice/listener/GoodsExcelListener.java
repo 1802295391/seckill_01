@@ -29,6 +29,7 @@ public class GoodsExcelListener extends AnalysisEventListener<ExcelGoodsData>
         goods.setCoverImage(user.getCoverImage());
         goods.setDetailImage(user.getDetailImage());
         goods.setStartTime(user.getStartTime());
+        goods.setLevel(user.getLevel());
         goods.setNum(user.getNum());
         goods.setLimitNum(user.getLimitNum());
         goods.setPrice(user.getPrice());

@@ -12,6 +12,7 @@
         <module>service/service-ucenter</module>
         <module>service/service-manage</module>
         <module>service/service-cms</module>
+        <module>service/service-audit</module>
     </modules>
 
     <parent>

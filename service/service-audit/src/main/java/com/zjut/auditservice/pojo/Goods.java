@@ -1,12 +1,8 @@
-package com.zjut.manageservice.pojo;
+package com.zjut.auditservice.pojo;
 
 import java.math.BigDecimal;
-
-import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.IdType;
 import java.util.Date;
-
-import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import java.io.Serializable;
 import io.swagger.annotations.ApiModel;
@@ -20,8 +16,8 @@ import lombok.experimental.Accessors;
  * 产品表
  * </p>
  *
- * @author atguigu
- * @since 2022-11-29
+ * @author xww
+ * @since 2022-11-30
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -32,7 +28,7 @@ public class Goods implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "id")
-    @TableId(value = "id", type = IdType.ID_WORKER_STR)
+    @TableId(value = "id", type = IdType.ID_WORKER)
     private String id;
 
     @ApiModelProperty(value = "产品标题")
@@ -53,9 +49,6 @@ public class Goods implements Serializable {
     @ApiModelProperty(value = "退回原因")
     private String cause;
 
-    @ApiModelProperty(value = "等级")
-    private Integer level;
-
     @ApiModelProperty(value = "价格")
     private BigDecimal price;
 
@@ -65,16 +58,18 @@ public class Goods implements Serializable {
     @ApiModelProperty(value = "限制数量")
     private Integer limitNum;
 
-    @ApiModelProperty(value = "产品描述")
-    private String description;
     @ApiModelProperty(value = "是否为可退款产品(0可退款，1不可退款)")
     private Integer isRefund;
+
+    @ApiModelProperty(value = "产品描述")
+    private String description;
+
     @ApiModelProperty(value = "是否删除(0-未删, 1-已删)")
     private Integer isDeleted;
-    @TableField(fill = FieldFill.INSERT)
+
     @ApiModelProperty(value = "创建时间")
     private Date gmtCreate;
-    @TableField(fill = FieldFill.INSERT_UPDATE)
+
     @ApiModelProperty(value = "更新时间")
     private Date gmtModified;
 
