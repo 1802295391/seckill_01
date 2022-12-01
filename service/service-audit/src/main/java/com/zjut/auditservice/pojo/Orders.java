@@ -1,12 +1,12 @@
 package com.zjut.auditservice.pojo;
 
 import java.math.BigDecimal;
-import com.baomidou.mybatisplus.annotation.IdType;
+
+import com.baomidou.mybatisplus.annotation.*;
+
 import java.util.Date;
-import com.baomidou.mybatisplus.annotation.TableId;
 import java.io.Serializable;
 
-import com.baomidou.mybatisplus.annotation.TableLogic;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -63,10 +63,14 @@ public class Orders implements Serializable {
     @ApiModelProperty(value = "是否为可退款产品(0可退款，1不可退款)")
     private Integer isRefund;
 
+
     @ApiModelProperty(value = "创建时间")
+
+    @TableField(fill = FieldFill.INSERT)
     private Date gmtCreate;
 
     @ApiModelProperty(value = "更新时间")
+    @TableField(fill = FieldFill.INSERT_UPDATE)
     private Date gmtModified;
 
     @ApiModelProperty(value = "是否删除(0-未删, 1-已删")
