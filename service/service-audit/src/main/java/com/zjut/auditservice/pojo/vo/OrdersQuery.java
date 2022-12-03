@@ -13,7 +13,7 @@ public class OrdersQuery implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @ApiModelProperty(value = "订单号,模糊查询")
-    private String ordersId;
+    private String orders_num;
     @ApiModelProperty(value = "订单状态")
     private Integer state;
     @ApiModelProperty(value = "订单价格最小值")

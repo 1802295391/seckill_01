@@ -43,7 +43,11 @@ public class ManageController {
     @PostMapping("addManager")
     public R addManger(@RequestBody Manage manage) {
         boolean save = manageService.save(manage);
-        return R.ok();
+        if(save) {
+            return R.ok();
+        } else {
+            return R.error();
+        }
     }
 
     @ApiOperation(value = "根据id修改管理员")
@@ -82,14 +86,14 @@ public class ManageController {
 
         //构建条件
         QueryWrapper<Manage> wrapper = new QueryWrapper<>();
-        wrapper.eq("is_deleted",0);
+       // wrapper.eq("is_deleted",0);
         // 多条件组合查询
         // mybatis学过 动态sql
-        String name = managerQuery.getName();
+        String username = managerQuery.getUsername();
         //判断条件值是否为空，如果不为空拼接条件
-        if(!StringUtils.isEmpty(name)) {
+        if(!StringUtils.isEmpty(username)) {
             //构建条件
-            wrapper.like("name",name);
+            wrapper.like("username",username);
         }
 
         //调用方法实现条件查询分页

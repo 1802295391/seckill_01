@@ -89,31 +89,27 @@ public class GoodsController {
 
 
     @ApiOperation(value = "同意商品发布")
-    @PostMapping("allowOrder/{id}")
-    public R allowOrder(@RequestBody Goods goods) {
-        goods.setAudit(1);
-        boolean flag = goodsService.updateById(goods);
-        if(flag) {
+    @PostMapping("allow/{id}")
+    public R allowOrder(@PathVariable String id) {
+        Goods goods = new Goods();
+            goods.setId(id);
+            goods.setAudit(1);
+            goodsService.updateById(goods);
             return R.ok();
-        } else {
-            return R.error();
-        }
     }
 
     @ApiOperation(value = "驳回商品")
-    @PostMapping("disallowOrder/{id}")
-    public R disallowOrder(@RequestBody Goods goods) {
+    @PostMapping("disallow/{id}")
+    public R disallowOrder(@PathVariable String id) {
+        Goods goods = new Goods();
+        goods.setId(id);
         goods.setAudit(2);
-        boolean flag = goodsService.updateById(goods);
-        if(flag) {
-            return R.ok();
-        } else {
-            return R.error();
-        }
+        goodsService.updateById(goods);
+        return R.ok();
     }
 
     @ApiOperation(value = "驳回原因")
-    @PostMapping("{cause}")
+    @PostMapping("/cause")
     public R cause(@RequestBody Goods goods){
         boolean flag = goodsService.updateById(goods);
         if(flag) {

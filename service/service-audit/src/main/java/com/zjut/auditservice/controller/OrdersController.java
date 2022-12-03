@@ -34,17 +34,17 @@ public class OrdersController {
     private OrdersService ordersService;
 
     @ApiOperation(value = "订单分页查询条件")
-    @PostMapping("{page}/{limit}")
+    @PostMapping("pageOrderCondition/{current}/{limit}")
     public R pageQuery(
-            @ApiParam(name = "page", value = "当前页码", required = true)
-            @PathVariable Long page,
+            @ApiParam(name = "current", value = "当前页码", required = true)
+            @PathVariable Long current,
             @ApiParam(name = "limit", value = "每页记录数", required = true)
             @PathVariable Long limit,
             @ApiParam(name = "OrdersQuery", value = "查询对象", required = false)
             @RequestBody(required = false) OrdersQuery ordersQuery) {
 
         //创建page对象
-        Page<Orders> pageOrders= new Page<>(page,limit);
+        Page<Orders> pageOrders= new Page<>(current,limit);
 
         //构建条件
         QueryWrapper<Orders> wrapper = new QueryWrapper<>();
@@ -52,14 +52,14 @@ public class OrdersController {
         wrapper.orderByDesc("gmt_modified");
         // 多条件组合查询
         // mybatis学过 动态sql
-        String ordersId = ordersQuery.getOrdersId();
+        String orders_num = ordersQuery.getOrders_num();
         BigDecimal pricemin = ordersQuery.getPricemin();
         BigDecimal pricemax = ordersQuery.getPricemax();
         String begintime = ordersQuery.getBegintime();
         wrapper.eq("is_deleted",0);
         wrapper.eq("state",2);
-        if (!StringUtils.isEmpty(ordersId)) {
-            wrapper.like("orders_num", ordersId);
+        if (!StringUtils.isEmpty(orders_num)) {
+            wrapper.like("orders_num", orders_num);
         }
         if (!StringUtils.isEmpty(pricemax)) {
             wrapper.le("total_price", pricemax);
