@@ -19,6 +19,8 @@
         <module>service-ucenter</module>
         <module>service-audit</module>
         <module>service-statistics1</module>
+        <module>service-collection</module>
+        <module>service-order</module>
     </modules>
 
 

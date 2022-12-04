@@ -3,10 +3,12 @@ package com.zjut.manageservice.service;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.zjut.manageservice.pojo.Goods;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.zjut.manageservice.pojo.dto.FrontGoodsQuery;
 import com.zjut.manageservice.pojo.vo.GoodsQuery;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -29,4 +31,6 @@ public interface GoodsService extends IService<Goods> {
     Goods setAudit(String id);
 
     List<Goods> goodslist();
+
+    Map<String, Object> FrontpageQuery(Page<Goods> pageParam, FrontGoodsQuery goodsQuery);
 }

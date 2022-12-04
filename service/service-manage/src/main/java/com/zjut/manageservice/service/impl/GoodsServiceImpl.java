@@ -6,11 +6,9 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.zjut.baseservice.exceptionhandler.GuliException;
 import com.zjut.manageservice.listener.GoodsExcelListener;
 import com.zjut.manageservice.pojo.Goods;
-import com.zjut.manageservice.pojo.Goods;
-import com.zjut.manageservice.pojo.Goods;
 import com.zjut.manageservice.mapper.GoodsMapper;
+import com.zjut.manageservice.pojo.dto.FrontGoodsQuery;
 import com.zjut.manageservice.pojo.excel.ExcelGoodsData;
-import com.zjut.manageservice.pojo.vo.GoodsQuery;
 import com.zjut.manageservice.pojo.vo.GoodsQuery;
 import com.zjut.manageservice.service.GoodsService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -21,7 +19,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.InputStream;
 import java.math.BigDecimal;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -58,7 +58,7 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
             queryWrapper.ge("price", min);
         }
         if (!StringUtils.isEmpty(begin)) {
-            queryWrapper.ge("gmt_create", begin);
+            queryWrapper.ge("start_time", begin);
         }
         if (!StringUtils.isEmpty(audit)) {
             queryWrapper.eq("audit", audit);
@@ -165,8 +165,56 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
     public List<Goods> goodslist() {
         QueryWrapper<Goods> queryWrapper=new QueryWrapper();
         queryWrapper.orderByDesc("gmt_create");
+        queryWrapper.eq("audit",1);
         queryWrapper.last("limit 8");
         return baseMapper.selectList(queryWrapper);
+    }
+
+
+
+    @Override
+    public Map<String, Object> FrontpageQuery(Page<Goods> pageParam, FrontGoodsQuery goodsQuery) {
+        QueryWrapper<Goods> queryWrapper = new QueryWrapper<>();
+        queryWrapper.orderByDesc("gmt_create");
+        if (goodsQuery == null) {
+            baseMapper.selectPage(pageParam, queryWrapper);
+            return null;
+        }
+
+        BigDecimal price = goodsQuery.getPrice();
+
+
+        String begin = goodsQuery.getBegintime();
+        String create = goodsQuery.getTime();
+        queryWrapper.eq("audit",1);
+        if (!StringUtils.isEmpty(price)) {
+            queryWrapper.orderByDesc("price");
+        }
+        if (!StringUtils.isEmpty(begin)) {
+            queryWrapper.orderByDesc("start_time");
+        }
+        if (!StringUtils.isEmpty(create)) {
+            queryWrapper.orderByDesc("gmt_create");
+        }
+
+
+        baseMapper.selectPage(pageParam, queryWrapper);
+        List<Goods> records=pageParam.getRecords();
+        long current = pageParam.getCurrent();
+        long pages = pageParam.getPages();
+        long size = pageParam.getSize();
+        long total = pageParam.getTotal();
+        boolean hasNext = pageParam.hasNext();
+        boolean hasPrevious = pageParam.hasPrevious();
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("items", records);
+        map.put("current", current);
+        map.put("pages", pages);
+        map.put("size", size);
+        map.put("total", total);
+        map.put("hasNext", hasNext);
+        map.put("hasPrevious", hasPrevious);
+        return map;
     }
 
 }

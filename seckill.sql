@@ -149,6 +149,7 @@ create table if not exists `orders`
     `goods_id` char(19) not null comment '产品id',
     `username` varchar(50) null comment '用户名',
     `title` varchar(50) null comment '产品名称',
+    `detail_image` varchar(256) null comment '详细图片',
     `state` tinyint null comment '支付状态（0待支付。1已支付。2退款中.3已完成后续交易的历史订单）',
     `phone` varchar(11) null comment '用户手机号',
     `total_price` decimal  null comment '总价格',
@@ -165,17 +166,42 @@ create table if not exists `orders`
 -- Records of orders
 -- ----------------------------
 
-insert into `orders` (`orders_id`,orders_num, `user_id`, `goods_id`, `username`, `title`, `state`, `phone`) values ('129227888958885069','888958885069', '1596558950512316410', '1189389726308478973', '钱睿渊', '厦门大学', 0, '17162194381');
-insert into `orders` (`orders_id`,orders_num,`user_id`, `goods_id`, `username`, `title`, `state`, `phone`) values ('129227888958885060','888958885060', '1596558950512316437', '1189389726308478973', '严志泽', '河海大学', 0, '17733446818');
-insert into `orders` (`orders_id`,orders_num, `user_id`, `goods_id`, `username`, `title`, `state`, `phone`) values ('129227888958885061','888958885061', '1596558950512316437', '1189389726308478971', '郭皓轩', '上海大学', 0, '15376909294');
-insert into `orders` (`orders_id`,orders_num, `user_id`, `goods_id`, `username`, `title`, `state`, `phone`) values ('129227888958885062','888958885069', '1596558950512316410', '1189389726308478973', '钱睿渊', '厦门大学', 0, '17162194381');
-insert into `orders` (`orders_id`,orders_num,`user_id`, `goods_id`, `username`, `title`, `state`, `phone`) values ('129227888958885063','888958885060', '1596558950512316437', '1189389726308478973', '严志泽', '河海大学', 0, '17733446818');
-insert into `orders` (`orders_id`,orders_num, `user_id`, `goods_id`, `username`, `title`, `state`, `phone`) values ('129227888958885064','888958885061', '1596558950512316437', '1189389726308478971', '郭皓轩', '上海大学', 0, '15376909294');
-insert into `orders` (`orders_id`,orders_num, `user_id`, `goods_id`, `username`, `title`, `state`, `phone`) values ('129227888958885065','888958885069', '1596558950512316410', '1189389726308478973', '钱睿渊', '厦门大学', 0, '17162194381');
-insert into `orders` (`orders_id`,orders_num,`user_id`, `goods_id`, `username`, `title`, `state`, `phone`) values ('129227888958885066','888958885060', '1596558950512316437', '1189389726308478973', '严志泽', '河海大学', 0, '17733446818');
-insert into `orders` (`orders_id`,orders_num, `user_id`, `goods_id`, `username`, `title`, `state`, `phone`) values ('129227888958885067','888958885061', '1596558950512316437', '1189389726308478971', '郭皓轩', '上海大学', 0, '15376909294');
+insert into `orders` (`orders_id`,orders_num, `user_id`, `goods_id`, `username`, `title`,`detail_image`, `state`, `phone`) values ('129227888958885069','888958885069', '1596558950512316410', '1189389726308478973', '钱睿渊', '厦门大学','hangzhou.aliyuncs.com/IMG_7081.jpg', 0, '17162194381');
+insert into `orders` (`orders_id`,orders_num,`user_id`, `goods_id`, `username`, `title`,`detail_image`, `state`, `phone`) values ('129227888958885060','888958885060', '1596558950512316437', '1189389726308478973', '严志泽', '河海大学','hangzhou.aliyuncs.com/IMG_7081.jpg', 0, '17733446818');
+insert into `orders` (`orders_id`,orders_num, `user_id`, `goods_id`, `username`, `title`,`detail_image`, `state`, `phone`) values ('129227888958885061','888958885061', '1596558950512316437', '1189389726308478971', '郭皓轩', '上海大学','hangzhou.aliyuncs.com/IMG_7081.jpg', 0, '15376909294');
+insert into `orders` (`orders_id`,orders_num, `user_id`, `goods_id`, `username`, `title`,`detail_image`, `state`, `phone`) values ('129227888958885062','888958885069', '1596558950512316410', '1189389726308478973', '钱睿渊', '厦门大学','hangzhou.aliyuncs.com/IMG_7081.jpg', 0, '17162194381');
+insert into `orders` (`orders_id`,orders_num,`user_id`, `goods_id`, `username`, `title`,`detail_image`, `state`, `phone`) values ('129227888958885063','888958885060', '1596558950512316437', '1189389726308478973', '严志泽', '河海大学','hangzhou.aliyuncs.com/IMG_7081.jpg', 0, '17733446818');
+insert into `orders` (`orders_id`,orders_num, `user_id`, `goods_id`, `username`, `title`,`detail_image`, `state`, `phone`) values ('129227888958885064','888958885061', '1596558950512316437', '1189389726308478971', '郭皓轩', '上海大学', 'hangzhou.aliyuncs.com/IMG_7081.jpg',0, '15376909294');
+insert into `orders` (`orders_id`,orders_num, `user_id`, `goods_id`, `username`, `title`,`detail_image`, `state`, `phone`) values ('129227888958885065','888958885069', '1596558950512316410', '1189389726308478973', '钱睿渊', '厦门大学','hangzhou.aliyuncs.com/IMG_7081.jpg', 0, '17162194381');
+insert into `orders` (`orders_id`,orders_num,`user_id`, `goods_id`, `username`, `title`,`detail_image`, `state`, `phone`) values ('129227888958885066','888958885060', '1596558950512316437', '1189389726308478973', '严志泽', '河海大学', 'hangzhou.aliyuncs.com/IMG_7081.jpg',0, '17733446818');
+insert into `orders` (`orders_id`,orders_num, `user_id`, `goods_id`, `username`, `title`,`detail_image`, `state`, `phone`) values ('129227888958885067','888958885061', '1596558950512316437', '1189389726308478971', '郭皓轩', '上海大学','hangzhou.aliyuncs.com/IMG_7081.jpg', 0, '15376909294');
 
 
+-- ----------------------------
+-- Table structure for t_pay_log
+-- ----------------------------
+DROP TABLE IF EXISTS `t_pay_log`;
+CREATE TABLE `t_pay_log` (
+     `id` char(19) NOT NULL DEFAULT '',
+     `order_no` varchar(20) NOT NULL DEFAULT '' COMMENT '订单号',
+     `pay_time` datetime DEFAULT NULL COMMENT '支付完成时间',
+     `total_fee` decimal(10,2) DEFAULT '0.01' COMMENT '支付金额（分）',
+     `transaction_id` varchar(30) DEFAULT NULL COMMENT '交易流水号',
+     `trade_state` char(20) DEFAULT NULL COMMENT '交易状态',
+     `pay_type` tinyint(3) NOT NULL DEFAULT '0' COMMENT '支付类型（1：微信 2：支付宝）',
+     `attr` text COMMENT '其他属性',
+     `is_deleted` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '逻辑删除 1（true）已删除， 0（false）未删除',
+     `gmt_create` datetime NOT NULL COMMENT '创建时间',
+     `gmt_modified` datetime NOT NULL COMMENT '更新时间',
+     PRIMARY KEY (`id`),
+     UNIQUE KEY `uk_order_no` (`order_no`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='支付日志表';
+
+-- ----------------------------
+-- Records of t_pay_log
+-- ----------------------------
+INSERT INTO `t_pay_log` VALUES ('1295350465545920514', '20200817212244397', '2020-08-17 21:23:12', '0.01', '4200000716202008178616288778', 'SUCCESS', '1', '{\"transaction_id\":\"4200000716202008178616288778\",\"nonce_str\":\"cEyoCjOyeqXliQvT\",\"trade_state\":\"SUCCESS\",\"bank_type\":\"OTHERS\",\"openid\":\"oHwsHuBXPNFFfvVIPO0ziWML1MTc\",\"sign\":\"82FCF003369C7099A273E5326BA66AB9\",\"return_msg\":\"OK\",\"fee_type\":\"CNY\",\"mch_id\":\"1558950191\",\"cash_fee\":\"1\",\"out_trade_no\":\"20200817212244397\",\"cash_fee_type\":\"CNY\",\"appid\":\"wx74862e0dfcf69954\",\"total_fee\":\"1\",\"trade_state_desc\":\"支付成功\",\"trade_type\":\"NATIVE\",\"result_code\":\"SUCCESS\",\"attach\":\"\",\"time_end\":\"20200817212159\",\"is_subscribe\":\"N\",\"return_code\":\"SUCCESS\"}', '0', '2020-08-17 21:23:12', '2020-08-17 21:23:12');
+INSERT INTO `t_pay_log` VALUES ('1295351158851768322', '20200817212544565', '2020-08-17 21:25:57', '0.01', '4200000722202008173765395839', 'SUCCESS', '1', '{\"transaction_id\":\"4200000722202008173765395839\",\"nonce_str\":\"o9ZhRL5bAKyH7fob\",\"trade_state\":\"SUCCESS\",\"bank_type\":\"OTHERS\",\"openid\":\"oHwsHuBXPNFFfvVIPO0ziWML1MTc\",\"sign\":\"7DAE26540D60F6751F4C6BDF349CFE63\",\"return_msg\":\"OK\",\"fee_type\":\"CNY\",\"mch_id\":\"1558950191\",\"cash_fee\":\"1\",\"out_trade_no\":\"20200817212544565\",\"cash_fee_type\":\"CNY\",\"appid\":\"wx74862e0dfcf69954\",\"total_fee\":\"1\",\"trade_state_desc\":\"支付成功\",\"trade_type\":\"NATIVE\",\"result_code\":\"SUCCESS\",\"attach\":\"\",\"time_end\":\"20200817212443\",\"is_subscribe\":\"N\",\"return_code\":\"SUCCESS\"}', '0', '2020-08-17 21:25:57', '2020-08-17 21:25:57');
 
 -- ----------------------------
 -- Table structure for audit

@@ -7,6 +7,7 @@ import lombok.Data;
 @Data
 @ApiModel(value="登录对象", description="登录对象")
 public class LoginInfoVo {
+    @ApiModelProperty(value = "id")
     private String id;
     @ApiModelProperty(value = "昵称")
     private String username;
