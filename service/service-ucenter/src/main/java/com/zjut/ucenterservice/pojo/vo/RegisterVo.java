@@ -8,9 +8,9 @@ import lombok.Data;
 @ApiModel(value="注册对象", description="注册对象")
 public class RegisterVo {
     @ApiModelProperty(value = "昵称")
-    private String nickname;
+    private String username;
     @ApiModelProperty(value = "手机号")
-    private String mobile;
+    private String phone;
     @ApiModelProperty(value = "密码")
     private String password;
     @ApiModelProperty(value = "验证码")

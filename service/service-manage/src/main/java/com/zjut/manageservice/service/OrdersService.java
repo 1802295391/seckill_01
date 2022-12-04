@@ -22,4 +22,8 @@ public interface OrdersService extends IService<Orders> {
     List<Orders> idasclist(OrdersQuery orders);
 
     void pageHistoryQuery(Page<Orders> pageParam, OrdersQuery ordersQuery);
+
+    Integer countClinchByDay(String day);
+
+    Integer countRefundByDay(String day);
 }

@@ -3,8 +3,10 @@ package com.zjut.ucenterservice.controller;
 import com.google.gson.Gson;
 import com.zjut.baseservice.exceptionhandler.GuliException;
 import com.zjut.commonutils.JwtUtils;
-import com.zjut.ucenterservice.pojo.UcenterMember;
-import com.zjut.ucenterservice.service.UcenterMemberService;
+import com.zjut.ucenterservice.pojo.Customer;
+
+import com.zjut.ucenterservice.service.CustomerService;
+
 import com.zjut.ucenterservice.util.ConstantPropertiesUtil;
 import com.zjut.ucenterservice.util.HttpClientUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +25,7 @@ import java.util.HashMap;
 @RequestMapping("/api/ucenter/wx")
 public class WxApiController {
     @Autowired
-    private UcenterMemberService memberService;
+    private CustomerService customerService;
     @GetMapping("login")
     public String genQrConnect(HttpSession session) {
         //固定地址，后面拼接参数
@@ -96,7 +98,7 @@ public class WxApiController {
 
             //把扫描人信息添加数据库里面
             //判断数据表里面是否存在相同微信信息，根据openid判断
-            UcenterMember member = memberService.getByOpenid(openid);
+            Customer member = customerService.getByOpenid(openid);
             if(member == null) {//memeber是空，表没有相同微信数据，进行添加
 
                 //3 拿着得到accsess_token 和 openid，再去请求微信提供固定的地址，获取到扫描人信息
@@ -117,15 +119,15 @@ public class WxApiController {
                 String nickname = (String)userInfoMap.get("nickname");//昵称
                 String headimgurl = (String)userInfoMap.get("headimgurl");//头像
                 System.out.println(userInfoMap);
-                member = new UcenterMember();
+                member = new Customer();
                 member.setOpenid(openid);
-                member.setNickname(nickname);
+                member.setUsername(nickname);
                 member.setAvatar(headimgurl);
-                memberService.save(member);
+                customerService.save(member);
             }
 
             //使用jwt根据member对象生成token字符串
-            String jwtToken = JwtUtils.getJwtToken(member.getId(), member.getNickname());
+            String jwtToken = JwtUtils.getJwtToken(member.getId(), member.getUsername());
             //最后：返回首页面，通过路径传递token字符串
             return "redirect:http://localhost:3000?token="+jwtToken;
         }catch(Exception e) {

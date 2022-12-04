@@ -27,4 +27,6 @@ public interface GoodsService extends IService<Goods> {
     void pageBackQuery(Page<Goods> pageParam, GoodsQuery goodsQuery);
 
     Goods setAudit(String id);
+
+    List<Goods> goodslist();
 }

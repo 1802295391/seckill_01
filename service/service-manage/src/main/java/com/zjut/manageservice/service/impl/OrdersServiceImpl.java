@@ -138,5 +138,14 @@ public class OrdersServiceImpl extends ServiceImpl<OrdersMapper, Orders> impleme
 
         baseMapper.selectPage(pageParam, queryWrapper);
     }
+    @Override
+    public Integer countClinchByDay(String day) {
+        return baseMapper.selectClinchCount(day);
+    }
+
+    @Override
+    public Integer countRefundByDay(String day) {
+        return baseMapper.selectRefundCount(day);
+    }
 
 }

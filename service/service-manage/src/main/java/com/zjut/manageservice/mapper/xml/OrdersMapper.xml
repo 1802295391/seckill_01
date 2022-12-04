@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zjut.manageservice.mapper.OrdersMapper">
-
+    <select id="selectRefundCount" resultType="java.lang.Integer">
+        SELECT COUNT(1)
+        FROM orders
+        WHERE DATE(gmt_modified) = #{day} and state = 2
+    </select>
+    <select id="selectClinchCount" resultType="java.lang.Integer">
+        SELECT COUNT(1)
+        FROM orders
+        WHERE DATE(gmt_modified) = #{day} and state = 3
+    </select>
 </mapper>

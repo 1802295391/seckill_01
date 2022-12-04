@@ -18,6 +18,7 @@
         <module>service-cms</module>
         <module>service-ucenter</module>
         <module>service-audit</module>
+        <module>service-statistics1</module>
     </modules>
 
 
@@ -32,15 +33,15 @@
         <!--        <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>-->
         <!--    </dependency>-->
         <!--    &lt;!&ndash;服务注册&ndash;&gt;-->
-        <!--    <dependency>-->
-        <!--        <groupId>org.springframework.cloud</groupId>-->
-        <!--        <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>-->
-        <!--    </dependency>-->
-        <!--    &lt;!&ndash;服务调用&ndash;&gt;-->
-        <!--    <dependency>-->
-        <!--        <groupId>org.springframework.cloud</groupId>-->
-        <!--        <artifactId>spring-cloud-starter-openfeign</artifactId>-->
-        <!--    </dependency>-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+        </dependency>
+            <!--服务调用-->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-openfeign</artifactId>
+            </dependency>
         <dependency>
             <groupId>com.example</groupId>
             <artifactId>service-base</artifactId>

@@ -88,4 +88,10 @@ public class CustomerServiceImpl extends ServiceImpl<CustomerMapper, Customer> i
             baseMapper.selectPage(pageParam, queryWrapper);
         }
 
+    @Override
+    public Integer countRegisterByDay(String day) {
+        return baseMapper.selectRegisterCount(day);
     }
+
+
+}

@@ -21,4 +21,8 @@ public interface CustomerService extends IService<Customer> {
 
 
     void pageQuery(Page<Customer> pageParam, CustomerQuery customerQuery);
+
+    Integer countRegisterByDay(String day);
+
+
 }

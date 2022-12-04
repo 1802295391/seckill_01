@@ -13,6 +13,9 @@
         <module>service/service-manage</module>
         <module>service/service-cms</module>
         <module>service/service-audit</module>
+
+
+        <module>service/service-statistics1</module>
     </modules>
 
     <parent>

@@ -9,7 +9,7 @@ import lombok.Data;
 public class LoginInfoVo {
     private String id;
     @ApiModelProperty(value = "昵称")
-    private String nickname;
+    private String username;
 
     @ApiModelProperty(value = "性别 1 女，2 男")
     private Integer sex;
@@ -20,5 +20,5 @@ public class LoginInfoVo {
     private String avatar;
 
     @ApiModelProperty(value = "用户手机号")
-    private String mobile;
+    private String phone;
 }

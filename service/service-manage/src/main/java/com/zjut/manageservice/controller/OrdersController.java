@@ -92,5 +92,19 @@ public class OrdersController {
         return R.ok().data("total", total).data("rows", records);
     }
 
+
+    @GetMapping(value = "countclinch/{day}")
+    public R clinchCount(@PathVariable String day){
+        Integer count = ordersService.countClinchByDay(day);
+        return R.ok().data("countClinch", count);
+    }
+
+    @GetMapping(value = "countrefund/{day}")
+    public R refundCount(@PathVariable String day){
+        Integer count = ordersService.countRefundByDay(day);
+        return R.ok().data("countRefund", count);
+    }
+
+
 }
 

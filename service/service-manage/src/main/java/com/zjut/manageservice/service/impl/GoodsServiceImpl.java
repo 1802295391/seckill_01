@@ -14,6 +14,7 @@ import com.zjut.manageservice.pojo.vo.GoodsQuery;
 import com.zjut.manageservice.pojo.vo.GoodsQuery;
 import com.zjut.manageservice.service.GoodsService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
@@ -158,6 +159,14 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
          goods.setCause("");
 
         return goods;
+    }
+    @Cacheable(value="goods",key ="'selectgoods'")
+    @Override
+    public List<Goods> goodslist() {
+        QueryWrapper<Goods> queryWrapper=new QueryWrapper();
+        queryWrapper.orderByDesc("gmt_create");
+        queryWrapper.last("limit 8");
+        return baseMapper.selectList(queryWrapper);
     }
 
 }

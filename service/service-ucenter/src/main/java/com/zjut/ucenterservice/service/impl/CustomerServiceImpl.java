@@ -4,12 +4,13 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.zjut.baseservice.exceptionhandler.GuliException;
 import com.zjut.commonutils.JwtUtils;
 import com.zjut.commonutils.MD5;
-import com.zjut.ucenterservice.pojo.UcenterMember;
-import com.zjut.ucenterservice.mapper.UcenterMemberMapper;
+import com.zjut.ucenterservice.pojo.Customer;
+import com.zjut.ucenterservice.mapper.CustomerMapper;
+
 import com.zjut.ucenterservice.pojo.vo.LoginInfoVo;
 import com.zjut.ucenterservice.pojo.vo.LoginVo;
 import com.zjut.ucenterservice.pojo.vo.RegisterVo;
-import com.zjut.ucenterservice.service.UcenterMemberService;
+import com.zjut.ucenterservice.service.CustomerService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,15 +20,14 @@ import org.springframework.util.StringUtils;
 
 /**
  * <p>
- * 会员表 服务实现类
+ * 用户表 服务实现类
  * </p>
  *
  * @author atguigu
- * @since 2022-11-26
+ * @since 2022-12-03
  */
 @Service
-public class UcenterMemberServiceImpl extends ServiceImpl<UcenterMemberMapper, UcenterMember> implements UcenterMemberService {
-
+public class CustomerServiceImpl extends ServiceImpl<CustomerMapper, Customer> implements CustomerService {
     @Autowired
     private RedisTemplate<String, String> redisTemplate;
     /**
@@ -37,18 +37,20 @@ public class UcenterMemberServiceImpl extends ServiceImpl<UcenterMemberMapper, U
      */
     @Override
     public String login(LoginVo loginVo) {
-        String mobile = loginVo.getMobile();
+        String phone = loginVo.getPhone();
         String password = loginVo.getPassword();
 //校验参数
-        if(StringUtils.isEmpty(mobile) ||
-                StringUtils.isEmpty(password) ||
-                StringUtils.isEmpty(mobile)) {
+        System.out.println(phone);
+        System.out.println(password);
+        if(StringUtils.isEmpty(phone) ||
+                StringUtils.isEmpty(password)
+               ) {
             throw new GuliException(20001,"error");
         }
 //获取会员
-        UcenterMember member = baseMapper.selectOne(new QueryWrapper<UcenterMember>().eq("mobile", mobile));
+        Customer member = baseMapper.selectOne(new QueryWrapper<Customer>().eq("phone", phone));
         if(null == member) {
-            throw new GuliException(20001,"error");
+            throw new GuliException(20001,"手机号已被注册");
         }
 //校验密码
         if(!MD5.encrypt(password).equals(member.getPassword())) {
@@ -59,9 +61,18 @@ public class UcenterMemberServiceImpl extends ServiceImpl<UcenterMemberMapper, U
             throw new GuliException(20001,"error");
         }
 //使用JWT生成token字符串
-        String token = JwtUtils.getJwtToken(member.getId(), member.getNickname());
+        String token = JwtUtils.getJwtToken(member.getId(), member.getUsername());
         return token;
     }
+
+
+
+
+
+
+
+
+
     /**
      * 会员注册
      * @param registerVo
@@ -69,13 +80,12 @@ public class UcenterMemberServiceImpl extends ServiceImpl<UcenterMemberMapper, U
     @Override
     public boolean register(RegisterVo registerVo) {
 //获取注册信息，进行校验
-        String nickname = registerVo.getNickname();
-        String mobile = registerVo.getMobile();
+        String username = registerVo.getUsername();
+        String phone = registerVo.getPhone();
         String password = registerVo.getPassword();
         String code = registerVo.getCode();
 //校验参数
-        if(StringUtils.isEmpty(mobile) ||
-                StringUtils.isEmpty(mobile) ||
+        if(StringUtils.isEmpty(phone) ||
                 StringUtils.isEmpty(password) ||
                 StringUtils.isEmpty(code)) {
             System.out.println("校验参数");
@@ -83,21 +93,23 @@ public class UcenterMemberServiceImpl extends ServiceImpl<UcenterMemberMapper, U
         }
 //校验校验验证码
 //从redis获取发送的验证码
-        String mobleCode = redisTemplate.opsForValue().get(mobile);
+        String mobleCode = redisTemplate.opsForValue().get(phone);
+        System.out.println(phone);
+        System.out.println(mobleCode);
         if(!code.equals(mobleCode)) {
             System.out.println("校验校验验证码");
             return false;
         }
 //查询数据库中是否存在相同的手机号码
-        Integer count = baseMapper.selectCount(new QueryWrapper<UcenterMember>().eq("mobile", mobile));
-        if(count.intValue() > 0) {
+        Integer count = baseMapper.selectCount(new QueryWrapper<Customer>().eq("phone", phone));
+        if(count > 0) {
             System.out.println("查询数据库中是否存在相同的手机号码");
             return false;
         }
 //添加注册信息到数据库
-        UcenterMember member = new UcenterMember();
-        member.setNickname(nickname);
-        member.setMobile(registerVo.getMobile());
+        Customer member = new Customer();
+        member.setUsername(username);
+        member.setPhone(registerVo.getPhone());
         member.setPassword(MD5.encrypt(password));
         member.setIsDisabled(false);
         member.setAvatar("http://thirdwx.qlogo.cn/mmopen/vi_32/DYAIOgq83eoj0hHXhgJNOTSOFsS4uZs8x1ConecaVOB8eIl115xmJZcT4oCicvia7wMEufibKtTLqiaJeanU2Lpg3w/132");
@@ -106,19 +118,22 @@ public class UcenterMemberServiceImpl extends ServiceImpl<UcenterMemberMapper, U
     }
 
 
+
+
     @Override
     public LoginInfoVo getLoginInfo(String memberId) {
-        UcenterMember member = baseMapper.selectById(memberId);
+        Customer member = baseMapper.selectById(memberId);
         LoginInfoVo loginInfoVo = new LoginInfoVo();
         BeanUtils.copyProperties(member, loginInfoVo);
         return loginInfoVo;
     }
 
+
     @Override
-    public UcenterMember getByOpenid(String openid) {
-        QueryWrapper<UcenterMember> queryWrapper = new QueryWrapper<>();
+    public Customer getByOpenid(String openid) {
+        QueryWrapper<Customer> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("openid", openid);
-        UcenterMember member = baseMapper.selectOne(queryWrapper);
+        Customer member = baseMapper.selectOne(queryWrapper);
         return member;
     }
 }

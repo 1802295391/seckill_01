@@ -1,6 +1,6 @@
 package com.zjut.ucenterservice.service;
 
-import com.zjut.ucenterservice.pojo.UcenterMember;
+import com.zjut.ucenterservice.pojo.Customer;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.zjut.ucenterservice.pojo.vo.LoginInfoVo;
 import com.zjut.ucenterservice.pojo.vo.LoginVo;
@@ -8,13 +8,13 @@ import com.zjut.ucenterservice.pojo.vo.RegisterVo;
 
 /**
  * <p>
- * 会员表 服务类
+ * 用户表 服务类
  * </p>
  *
  * @author atguigu
- * @since 2022-11-26
+ * @since 2022-12-03
  */
-public interface UcenterMemberService extends IService<UcenterMember> {
+public interface CustomerService extends IService<Customer> {
 
     String login(LoginVo loginVo);
 
@@ -22,5 +22,5 @@ public interface UcenterMemberService extends IService<UcenterMember> {
 
     LoginInfoVo getLoginInfo(String memberId);
 
-    UcenterMember getByOpenid(String openid);
+    Customer getByOpenid(String openid);
 }
