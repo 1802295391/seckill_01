@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Objects;
 
 /**
  * <p>
@@ -28,7 +29,20 @@ public class OrdersController {
     //根据课程id和用户id创建订单，返回订单id
     @PostMapping("createOrder/{courseId}")
     public R createOrder(@PathVariable String courseId, HttpServletRequest request) {
-        String orderNum = orderService.saveOrder(courseId, JwtUtils.getMemberIdByJwtToken(request));
+        String userId=JwtUtils.getMemberIdByJwtToken(request);
+        if(userId=="请先登录")
+        {
+            return R.error().message("请先登录");
+        }
+        String orderNum = orderService.saveOrder(courseId, userId);
+        if(orderNum.equals( "您等级不够"))
+        {
+            return R.error().message("您等级太低了");
+        }
+        if(orderNum.equals( "秒杀未开始"))
+        {
+            return R.error().message("秒杀未开始");
+        }
         return R.ok().data("orderNum", orderNum);
     }
 

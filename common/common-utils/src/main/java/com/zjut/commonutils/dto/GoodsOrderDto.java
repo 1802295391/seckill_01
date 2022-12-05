@@ -9,6 +9,7 @@ import lombok.experimental.Accessors;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Date;
 
 /**
  * <p>
@@ -34,7 +35,8 @@ public class GoodsOrderDto implements Serializable {
 
     @ApiModelProperty(value = "详细图片")
     private String detailImage;
-
+    @ApiModelProperty(value = "秒杀开始时间")
+    private Date startTime;
 
     @ApiModelProperty(value = "等级")
     private Integer level;

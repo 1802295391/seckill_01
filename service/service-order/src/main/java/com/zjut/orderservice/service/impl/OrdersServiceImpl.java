@@ -11,6 +11,9 @@ import com.zjut.orderservice.utils.OrderNoUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * <p>
  * 订单表 服务实现类
@@ -28,6 +31,18 @@ public class OrdersServiceImpl extends ServiceImpl<OrdersMapper, Orders> impleme
     public String saveOrder(String courseId, String memberIdByJwtToken) {
          GoodsOrderDto orderGoods = orderClient.getOrderGoods(courseId);
        CustomerDto orderUser = orderClient.getOrderUser(memberIdByJwtToken);
+       if(orderGoods.getLevel()>orderUser.getLevel())
+       {
+           return "您等级不够";
+       }
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String newDate = sdf.format(new Date());
+        Date startTime = orderGoods.getStartTime();
+        System.out.println("====================="+orderGoods.getStartTime());
+        String time=sdf.format(startTime);
+        if(time.compareTo(newDate)>0 ) {
+            return "秒杀未开始";
+        }
         Orders orders = new Orders();
         orders.setDetailImage(orderGoods.getDetailImage());
         orders.setUserId(orderUser.getId());

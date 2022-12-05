@@ -69,7 +69,7 @@ create table if not exists `goods`
     `audit` tinyint default 0 null comment '审核字段（0审核。1上架。2退回。3售完）',
     `cause` longtext null comment '退回原因',
     `level` int default 0 null comment '等级',
-    `price` decimal null comment '价格',
+    `price` decimal(10,2) null comment '价格',
     `num` int null comment '数量',
     `limit_num` int not null comment '限制数量',
     `is_refund` tinyint default 0 null comment '是否为可退款产品(0可退款，1不可退款)',
