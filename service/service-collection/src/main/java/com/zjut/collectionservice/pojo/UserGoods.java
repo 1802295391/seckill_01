@@ -36,4 +36,5 @@ public class UserGoods implements Serializable {
     private String goodsId;
 
 
+
 }

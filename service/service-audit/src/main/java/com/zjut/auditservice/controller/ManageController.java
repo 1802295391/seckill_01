@@ -43,7 +43,7 @@ public class ManageController {
     @PostMapping("addManager")
     public R addManger(@RequestBody Manage manage) {
         boolean save = manageService.save(manage);
-       return R.ok();
+        return R.ok();
     }
 
     @ApiOperation(value = "根据id修改管理员")

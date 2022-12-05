@@ -17,4 +17,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserGoodsServiceImpl extends ServiceImpl<UserGoodsMapper, UserGoods> implements UserGoodsService {
 
+    @Override
+    public void insertcollection(String goodsId, String memberIdByJwtToken) {
+         UserGoods userGoods = new UserGoods();
+         userGoods.setGoodsId(goodsId);
+         userGoods.setUserId(memberIdByJwtToken);
+         baseMapper.insert(userGoods);
+
+    }
 }

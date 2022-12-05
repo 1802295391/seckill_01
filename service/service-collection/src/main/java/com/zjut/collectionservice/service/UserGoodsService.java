@@ -13,4 +13,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface UserGoodsService extends IService<UserGoods> {
 
+    void insertcollection(String goodsId, String memberIdByJwtToken);
 }

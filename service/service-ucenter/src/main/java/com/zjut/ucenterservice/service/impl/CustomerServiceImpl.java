@@ -50,7 +50,7 @@ public class CustomerServiceImpl extends ServiceImpl<CustomerMapper, Customer> i
 //获取会员
         Customer member = baseMapper.selectOne(new QueryWrapper<Customer>().eq("phone", phone));
         if(null == member) {
-            throw new GuliException(20001,"手机号已被注册");
+            throw new GuliException(20001," ");
         }
 //校验密码
         if(!MD5.encrypt(password).equals(member.getPassword())) {
