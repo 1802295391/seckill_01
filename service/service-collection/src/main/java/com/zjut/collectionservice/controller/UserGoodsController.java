@@ -29,9 +29,9 @@ public class UserGoodsController {
     public R star(@PathVariable String goodsId, HttpServletRequest request )
         {
 
-             userGoodsService.insertcollection(goodsId,getMemberIdByJwtToken(request));
+            userGoodsService.insertcollection(goodsId,getMemberIdByJwtToken(request));
             return R.ok();
         }
-    
+
 }
 
