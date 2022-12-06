@@ -34,11 +34,11 @@ public class ExcelGoodsData {
 
     @ExcelProperty(index = 7)
     private Integer limitNum;
-
-    @ExcelProperty(index =8)
+    @ExcelProperty(index = 8)
+    private String description;
+    @ExcelProperty(index =9)
     private Integer isRefund;
 
-    @ExcelProperty(index = 9)
-    private String description;
+
 
 }
