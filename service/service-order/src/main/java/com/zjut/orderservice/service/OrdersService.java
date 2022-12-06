@@ -13,5 +13,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface OrdersService extends IService<Orders> {
 
-    String saveOrder(String courseId, String memberIdByJwtToken);
+    String saveOrder(String courseId, String memberIdByJwtToken,Integer userNum);
 }

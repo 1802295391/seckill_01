@@ -118,7 +118,7 @@ public class WxApiController {
                 HashMap userInfoMap = gson.fromJson(userInfo, HashMap.class);
                 String nickname = (String)userInfoMap.get("nickname");//昵称
                 String headimgurl = (String)userInfoMap.get("headimgurl");//头像
-                System.out.println(userInfoMap);
+                System.out.println("000000000000000000000000000000000000000000000"+userInfoMap);
                 member = new Customer();
                 member.setOpenid(openid);
                 member.setUsername(nickname);
@@ -128,6 +128,7 @@ public class WxApiController {
 
             //使用jwt根据member对象生成token字符串
             String jwtToken = JwtUtils.getJwtToken(member.getId(), member.getUsername());
+            System.out.println("2222222222222222222222222222222222222222222222"+member);
             //最后：返回首页面，通过路径传递token字符串
             return "redirect:http://localhost:3000?token="+jwtToken;
         }catch(Exception e) {

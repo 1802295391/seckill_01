@@ -27,14 +27,15 @@ public class OrdersController {
     @Autowired
     private OrdersService orderService;
     //根据课程id和用户id创建订单，返回订单id
-    @PostMapping("createOrder/{courseId}")
-    public R createOrder(@PathVariable String courseId, HttpServletRequest request) {
+    @PostMapping("createOrder/{courseId}/{userNum}")
+    public R createOrder(@PathVariable("courseId") String courseId, @PathVariable("userNum") Integer userNum,HttpServletRequest request) {
         String userId=JwtUtils.getMemberIdByJwtToken(request);
+        System.out.println("+++++++++++++++"+userNum);
         if(userId=="请先登录")
         {
             return R.error().message("请先登录");
         }
-        String orderNum = orderService.saveOrder(courseId, userId);
+        String orderNum = orderService.saveOrder(courseId, userId,userNum);
         if(orderNum.equals( "您等级不够"))
         {
             return R.error().message("您等级太低了");
@@ -42,6 +43,18 @@ public class OrdersController {
         if(orderNum.equals( "秒杀未开始"))
         {
             return R.error().message("秒杀未开始");
+        }
+        if(orderNum.equals("库存不足"))
+        {
+            return R.error().message("库存不足");
+        }
+        if(orderNum.equals("别捣乱"))
+        {
+            return R.error().message("商品不能买负数");
+        }
+        if(orderNum.equals("超过购买限制"))
+        {
+            return R.error().message("超过购买限制");
         }
         return R.ok().data("orderNum", orderNum);
     }

@@ -45,6 +45,7 @@ public class TPayLogController {
         if (map.get("trade_state").equals("SUCCESS")) {//如果成功
 //更改订单状态
             payService.updateOrderStatus(map);
+
             return R.ok().message("支付成功");
         }
         return R.ok().code(25000).message("支付中");

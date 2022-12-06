@@ -52,6 +52,7 @@ public class CustomerController {
     public R getLoginInfo(HttpServletRequest request){
         try {
             String memberId = JwtUtils.getMemberIdByJwtToken(request);
+            System.out.println("想看的东西1"+memberId);
             LoginInfoVo loginInfoVo = customerService.getLoginInfo(memberId);
             return R.ok().data("item", loginInfoVo);
         }catch (Exception e){

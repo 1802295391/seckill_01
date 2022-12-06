@@ -7,6 +7,8 @@ import com.zjut.manageservice.pojo.Goods;
 
 import com.zjut.manageservice.service.GoodsService;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -24,6 +26,24 @@ public class GoodsForOrder {
          GoodsOrderDto goodsOrderDto = new GoodsOrderDto();
         BeanUtils.copyProperties(goods,goodsOrderDto);
         return goodsOrderDto;
+    }
+
+
+    @PostMapping("update")
+    public void updateById(
+            @ApiParam(name = "goodsy", value = "商品对象", required = true)
+            @RequestBody Goods goodsy){
+        goodsService.updateById(goodsy);
+
+    }
+
+
+    @GetMapping("{id}")
+    public Goods getById(
+            @ApiParam(name = "id", value = "商品ID", required = true)
+            @PathVariable String id){
+
+        return goodsService.getById(id);
     }
 
 

@@ -124,7 +124,10 @@ public class CustomerServiceImpl extends ServiceImpl<CustomerMapper, Customer> i
     public LoginInfoVo getLoginInfo(String memberId) {
         Customer member = baseMapper.selectById(memberId);
         LoginInfoVo loginInfoVo = new LoginInfoVo();
+        System.out.println("############################memberId"+memberId);
+        System.out.println("============================================="+member);
         BeanUtils.copyProperties(member, loginInfoVo);
+        System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++"+loginInfoVo);
         return loginInfoVo;
     }
 

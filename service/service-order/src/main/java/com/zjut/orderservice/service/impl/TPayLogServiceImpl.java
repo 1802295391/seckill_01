@@ -3,6 +3,9 @@ package com.zjut.orderservice.service.impl;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.github.wxpay.sdk.WXPayUtil;
+import com.zjut.commonutils.dto.Goods;
+import com.zjut.commonutils.dto.GoodsOrderDto;
+import com.zjut.orderservice.client.OrderClient;
 import com.zjut.orderservice.pojo.Orders;
 import com.zjut.orderservice.pojo.TPayLog;
 import com.zjut.orderservice.mapper.TPayLogMapper;
@@ -29,7 +32,8 @@ import java.util.Map;
  */
 @Service
 public class TPayLogServiceImpl extends ServiceImpl<TPayLogMapper, TPayLog> implements TPayLogService {
-
+    @Autowired
+    private OrderClient orderClient;
 
     @Autowired
     private OrdersService orderService;
@@ -48,7 +52,7 @@ public class TPayLogServiceImpl extends ServiceImpl<TPayLogMapper, TPayLog> impl
             m.put("nonce_str", WXPayUtil.generateNonceStr());
             m.put("body", order.getTitle());
             m.put("out_trade_no", orderNum);
-            m.put("total_fee", order.getTotalPrice().multiply(new BigDecimal("100")).longValue()+"");
+            m.put("total_fee", order.getTotalPrice().multiply(new BigDecimal("100")).longValue()*order.getGoodsNum()+"");
             m.put("spbill_create_ip", "127.0.0.1");
             m.put("notify_url", "http://guli.shop/api/order/weixinPay/weixinNotify\n");
             m.put("trade_type", "NATIVE");
@@ -65,7 +69,7 @@ public class TPayLogServiceImpl extends ServiceImpl<TPayLogMapper, TPayLog> impl
             Map map = new HashMap<>();
             map.put("out_trade_no", orderNum);
             map.put("course_id", order.getGoodsId());
-            map.put("total_fee", order.getTotalPrice());
+            map.put("total_fee", order.getTotalPrice().multiply(new BigDecimal("100")).longValue()*order.getGoodsNum());
             map.put("result_code", resultMap.get("result_code"));
             map.put("code_url", resultMap.get("code_url"));
 //微信支付二维码2小时过期，可采取2小时未支付取消订单
@@ -94,12 +98,39 @@ public class TPayLogServiceImpl extends ServiceImpl<TPayLogMapper, TPayLog> impl
         if(order.getState() == 1) return;
         order.setState(1);
         orderService.updateById(order);
+//        GoodsOrderDto orderGoods = orderClient.getOrderGoods(order.getGoodsId());
+//         Integer num = orderGoods.getNum();
+//         int t=num-order.getGoodsNum();
+//         orderGoods.setNum(t);
+        /*
+        *修改库存数量
+         */
+         Goods goods = orderClient.getById(order.getGoodsId());
+        Integer num = goods.getNum();
+        int t = num - order.getGoodsNum();
+        goods.setNum(t);
+        /*
+        如果库存为零就把状态改为售完
+         */
+        if(t==0)
+        {
+            goods.setAudit(3);
+        }
+        orderClient.updateById(goods);
+
+
+
 //记录支付日志
+        BigDecimal k=order.getTotalPrice();
+        for(int i=0;i<order.getGoodsNum()-1;i++)
+        {
+            k=k.add(k);
+        }
         TPayLog payLog=new TPayLog();
         payLog.setOrderNo(order.getOrdersNum());//支付订单号
         payLog.setPayTime(new Date());
         payLog.setPayType(1);//支付类型
-        payLog.setTotalFee(order.getTotalPrice());//总金额(分)
+        payLog.setTotalFee(k);//总金额(分)
         payLog.setTradeState(map.get("trade_state"));//支付状态
         payLog.setTransactionId(map.get("transaction_id"));
         payLog.setAttr(JSONObject.toJSONString(map));
