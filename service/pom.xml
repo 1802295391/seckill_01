@@ -20,7 +20,8 @@
         <module>service-audit</module>
         <module>service-statistics1</module>
         <module>service-collection</module>
-        <module>service-order</module>
+        <module>service-order1</module>
+        <module>service-booking</module>
     </modules>
 
 

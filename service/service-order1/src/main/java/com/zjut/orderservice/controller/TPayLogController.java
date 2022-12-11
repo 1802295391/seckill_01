@@ -29,8 +29,9 @@ public class TPayLogController {
      */
     @GetMapping("/createNative/{orderNum}")
     public R createNative(@PathVariable String orderNum) {
+        System.out.println("订单号好啊好"+orderNum);
         Map map = payService.createNative(orderNum);
-        System.out.println("===================="+map);
+        System.out.println("===================大撒大撒的"+map);
         return R.ok().data(map);
     }
 

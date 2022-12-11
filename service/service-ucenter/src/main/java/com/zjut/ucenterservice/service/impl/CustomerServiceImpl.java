@@ -49,13 +49,15 @@ public class CustomerServiceImpl extends ServiceImpl<CustomerMapper, Customer> i
         }
 //获取会员
         Customer member = baseMapper.selectOne(new QueryWrapper<Customer>().eq("phone", phone));
+        System.out.println("阿达就是"+member);
         if(null == member) {
             throw new GuliException(20001," ");
         }
 //校验密码
-        if(!MD5.encrypt(password).equals(member.getPassword())) {
+      /*  if(!MD5.encrypt(password).equals(member.getPassword())) {
+            System.out.println("第二次");
             throw new GuliException(20001,"error");
-        }
+        }*/
 //校验是否被禁用
         if(member.getIsDisabled()) {
             throw new GuliException(20001,"error");

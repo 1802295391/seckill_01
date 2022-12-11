@@ -14,7 +14,8 @@
         <module>service/service-cms</module>
         <module>service/service-audit</module>
 
-
+        <module>service/service-order1</module>
+        <module>service/service-booking</module>
         <module>service/service-statistics1</module>
     </modules>
 

@@ -23,6 +23,7 @@ public class indexController {
     @GetMapping("index")
     public R index() {
         List<Goods> goods = goodsService.goodslist();
+        System.out.println("飒飒的和"+goods);
         return R.ok().data("eduList",goods);
     }
 

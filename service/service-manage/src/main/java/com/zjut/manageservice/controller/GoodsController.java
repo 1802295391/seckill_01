@@ -138,6 +138,7 @@ public class GoodsController {
     public R getById(
             @ApiParam(name = "id", value = "商品ID", required = true)
             @PathVariable String id){
+        System.out.println("这里是id"+id);
         Goods goods = goodsService.getById(id);
         return R.ok().data("item", goods);
     }

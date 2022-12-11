@@ -25,6 +25,7 @@ public class FrontBannerController {
     @GetMapping("getAllBanner")
     public R index() {
         List<CrmBanner> list = bannerService.selectIndexList();
+
         return R.ok().data("bannerList", list);
     }
 }

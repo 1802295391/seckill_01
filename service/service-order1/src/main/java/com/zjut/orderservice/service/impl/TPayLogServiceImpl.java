@@ -4,7 +4,6 @@ import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.github.wxpay.sdk.WXPayUtil;
 import com.zjut.commonutils.dto.Goods;
-import com.zjut.commonutils.dto.GoodsOrderDto;
 import com.zjut.orderservice.client.OrderClient;
 import com.zjut.orderservice.pojo.Orders;
 import com.zjut.orderservice.pojo.TPayLog;
@@ -72,10 +71,12 @@ public class TPayLogServiceImpl extends ServiceImpl<TPayLogMapper, TPayLog> impl
             map.put("total_fee", order.getTotalPrice().multiply(new BigDecimal("100")).longValue()*order.getGoodsNum());
             map.put("result_code", resultMap.get("result_code"));
             map.put("code_url", resultMap.get("code_url"));
+            System.out.println("这种这种种子爱字字字自哀之"+resultMap.get("code_url"));
 //微信支付二维码2小时过期，可采取2小时未支付取消订单
       //    redisTemplate.opsForValue().set(orderNo, map, 120,TimeUnit.MINUTES);
             return map;
         } catch (Exception e) {
+            System.out.println("南岸难啊暗暗暗暗那");
             e.printStackTrace();
             return new HashMap<>();
         }

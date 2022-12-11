@@ -31,6 +31,7 @@ public class OrdersController {
     public R createOrder(@PathVariable("courseId") String courseId, @PathVariable("userNum") Integer userNum,HttpServletRequest request) {
         String userId=JwtUtils.getMemberIdByJwtToken(request);
         System.out.println("+++++++++++++++"+userNum);
+        System.out.println("token"+userId);
         if(userId=="请先登录")
         {
             return R.error().message("请先登录");
